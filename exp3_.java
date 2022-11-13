@@ -1,4 +1,8 @@
 package lab_6;
+import com.sun.jdi.ArrayReference;
+
+import java.sql.Array;
+
 import static java.lang.Math.*;
 
 public class exp3_ {
@@ -13,6 +17,7 @@ public class exp3_ {
 
         for (int i = 1; i <=8; i++) {
             for (int j = 1 ; j <= i; j++) {
+
                 summ += pow( (pow(j,cos(i)) + pow(i, cos(j))), 2);
             }
         }
@@ -34,17 +39,24 @@ public class exp3_ {
     }
 
     public static double function3() {
-        double mult_summ = 1 , summ = 0;
+        int[] myArray;
+        myArray =  new int[8];
+        int proz = 0, res= 1;
 
-        for (int i =1 ; i <=8; i ++){
-            for (int j= i; j <= 2*j-1; j ++) {
-                for (int k = i +j ; k <= 2*(i+j); k ++) {
-                    summ += (2*cos(j) - 3 * log(i + 0.5*k));
+        for (int i=1; i<=8 ; i++){
+            for (int j=i ; j<= 2*i-1;j++){
+                for (int k=i+j; k<=2*(i+j); k++){
+                    proz += (2*cos(j) - 3*log(i+0.5*k));
                 }
             }
-            mult_summ *= summ ;
-            summ = 0;
+            myArray[i-1] = proz;
+            proz = 0;
         }
-        return mult_summ;
+        for (int i= 0; i <=7;i++){
+
+            res *= myArray[i];
+        }
+        return res;
+
     }
 }
